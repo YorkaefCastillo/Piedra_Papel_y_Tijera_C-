@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    // Declarar variables
+    int usuario, maquina;  //<- aqui utilizamos enteros para que el usuario y la maquina almacenes sus opciones
+    string opciones[] = {"piedra", "papel", "tijera"};  //<-Esto es un array
+
+    // Solicitar al usuario que ingrese su elección
+    cout << "Ingresa tu elección (1 para piedra, 2 para papel, 3 para tijera): "; //<-Esto se muestra en pantalla para que lo vea el usuario
+    cin >> usuario; //<-Aqui se almacena la opcion del usuario
+
+    // Validar la entrada del usuario
+    if (usuario < 1 || usuario > 3) {
+        cout << "Entrada no válida. Debes ingresar 1, 2 o 3." << endl;
+        return 1; // Salir del programa con código de error
+    }
+
+    // Generar la elección aleatoria de la máquina
+    srand(time(0)); //<-Esto es una funcion de la libreria ctime, para obtenber un tiempo para qiue la maquina procese 
+    maquina = rand() % 3 + 1; // Genera un número aleatorio entre 1 y 3
+
+    // Mostrar las elecciones del usuario y la máquina
+    cout << "Usuario eligió: " << opciones[usuario - 1] << endl;
+    cout << "Máquina eligió: " << opciones[maquina - 1] << endl;
+
+    // Determinar el ganador
+    if (usuario == maquina) {
+        cout << "Empate." << endl;
+    } else if ((usuario == 1 && maquina == 3) ||
+               (usuario == 2 && maquina == 1) ||
+               (usuario == 3 && maquina == 2)) {
+        cout << "¡Ganaste!" << endl;
+    } else {
+        cout << "¡La máquina gana!" << endl;
+    }
+
+    return 0;
+}
